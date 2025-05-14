@@ -1,0 +1,68 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<div class="container py-4">
+    <h2>Split-Reverse</h2>
+    <form method="post" asp-page-handler="SplitReverse" class="mb-4">
+        <div class="mb-3">
+            <input name="InputText" value="" class="form-control" placeholder="Masukkan teks" />
+        </div>
+        <button type="submit" class="btn btn-primary">Process</button>
+    </form>
+    @if (!string.IsNullOrEmpty(Model.SplitResult))
+    {
+        <div class="alert alert-success">Result: <strong>@Model.SplitResult</strong></div>
+    }
+
+    <hr />
+
+    <h2>Anagram Check</h2>
+    <form method="post" asp-page-handler="AnagramCheck" class="mb-4">
+        <div class="mb-3">
+            <label>First Words</label>
+            <textarea name="FirstWords" class="form-control">cinema,host,aba,train</textarea>
+        </div>
+        <div class="mb-3">
+            <label>Second Words</label>
+            <textarea name="SecondWords" class="form-control">iceman,shot,bab,rain</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Check</button>
+    </form>
+    @if (!string.IsNullOrEmpty(Model.AnagramResult))
+    {
+        <div class="alert alert-success">Result: <strong>@Model.AnagramResult</strong></div>
+    }
+
+    <hr />
+
+    <h2>Hitung Diskon</h2>
+    <form method="post" asp-page-handler="Discount" class="mb-4">
+        <div class="mb-3">
+            <label>Tipe Customer</label>
+            <input name="CustomerType" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label>Point Reward</label>
+            <input name="PointReward" type="number" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label>Total Belanja</label>
+            <input name="TotalPurchase" type="number" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Count</button>
+    </form>
+    @if (!string.IsNullOrEmpty(Model.DiscountResult))
+    {
+        <div class="alert alert-success">
+            <strong>Hasil Perhitungan:</strong><br />
+            Tipe Customer: @Model.CustomerType <br />
+            Point Reward: @Model.PointReward <br />
+            Total Belanja: @Model.TotalPurchase <br />
+            @Html.Raw(Model.DiscountResult)
+        </div>
+    }
+</div>
